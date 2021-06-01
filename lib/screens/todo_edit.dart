@@ -47,6 +47,29 @@ class _TodoEditState extends State<TodoEdit> {
     });
   }
 
+  void updateOrAdd(TodoModel todo) {
+    final todoProvider = Provider.of<TodoProvider>(context, listen: false);
+    if (todoProvider.selectedTodo.id != null) {
+      print('updated');
+      todoProvider.updateTodo(todo);
+    } else {
+      print('created');
+      todoProvider.addTodo(todo);
+    }
+    Navigator.pushNamed(context, 'home');
+  }
+
+  @override
+  void initState() {
+    final selectedTodo = Provider.of<TodoProvider>(context, listen: false).selectedTodo;
+    titleController.text = selectedTodo.title;
+    detailsController.text = selectedTodo.details;
+    selectedCategory = selectedTodo.category;
+    _selectedDay = selectedTodo.date;
+    changeCategory(selectedCategory);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
@@ -192,16 +215,16 @@ class _TodoEditState extends State<TodoEdit> {
                 height: 40,
                 child: ElevatedButton(
                   onPressed: () {
-                    todoProvider.addTodo(
-                      TodoModel(
-                        details: detailsController.text,
-                        category: selectedCategory,
-                        title: titleController.text,
-                        date: _selectedDay ?? currentDate,
-                      ),
+                    TodoModel todo = TodoModel(
+                      details: detailsController.text,
+                      category: selectedCategory,
+                      title: titleController.text,
+                      date: _selectedDay ?? currentDate,
+                      id: todoProvider.selectedTodo.id ?? null,
                     );
+                    updateOrAdd(todo);
                     Fluttertoast.showToast(
-                      msg: 'To Do added successfully',
+                      msg: 'To Do saved successfully',
                       toastLength: Toast.LENGTH_SHORT,
                     );
                   },

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/constants/styles.dart';
+import 'package:todo/models/todoModel.dart';
+import 'package:todo/provider/todo_provider.dart';
 
 class TodoNavBar extends StatefulWidget {
   final bool isProfile;
@@ -13,6 +16,7 @@ class TodoNavBar extends StatefulWidget {
 class _TodoNavBarState extends State<TodoNavBar> {
   @override
   Widget build(BuildContext context) {
+    final todoProvider = Provider.of<TodoProvider>(context);
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -29,6 +33,12 @@ class _TodoNavBarState extends State<TodoNavBar> {
           ),
           InkWell(
             onTap: () {
+              todoProvider.selectedTodo = TodoModel(
+                details: 'details',
+                category: 'Study',
+                title: 'title',
+                date: DateTime.now(),
+              );
               Navigator.pushNamed(context, 'todoEdit');
             },
             child: Container(

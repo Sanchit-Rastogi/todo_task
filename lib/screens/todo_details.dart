@@ -53,6 +53,9 @@ class _TodoDetailsState extends State<TodoDetails> {
                         style: kLargeTextStyle,
                       ),
                       InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'todoEdit');
+                        },
                         child: Text(
                           'Edit',
                           style: TextStyle(

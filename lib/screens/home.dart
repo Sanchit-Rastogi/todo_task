@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/constants/styles.dart';
+import 'package:todo/db/todo_database.dart';
 import 'package:todo/provider/todo_provider.dart';
 import 'package:todo/widgets/homePage/TodoBox.dart';
 import 'package:todo/widgets/shared/bottomNavbar.dart';
@@ -11,6 +12,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    Provider.of<TodoProvider>(context, listen: false).loadTodo();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    TodoDatabase.instance.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
