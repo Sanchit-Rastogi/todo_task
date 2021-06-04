@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/constants/styles.dart';
-import 'package:todo/db/todo_database.dart';
-import 'package:todo/provider/todo_provider.dart';
-import 'package:todo/widgets/homePage/TodoBox.dart';
-import 'package:todo/widgets/shared/bottomNavbar.dart';
+import 'package:todo/ui/shared/styles.dart';
+import 'package:todo/core/services/todo_database.dart';
+import 'package:todo/core/viewmodels/todo_model.dart';
+import 'package:todo/ui/widgets/homePage/TodoBox.dart';
+import 'package:todo/ui/widgets/shared/bottomNavbar.dart';
 
 class HomePage extends StatefulWidget {
   @override

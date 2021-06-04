@@ -1,10 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/constants/colorMap.dart';
-import 'package:todo/constants/extensions.dart';
-import 'package:todo/constants/styles.dart';
-import 'package:todo/provider/todo_provider.dart';
+import 'package:todo/ui/routes/router.gr.dart';
+import 'package:todo/ui/shared/colorMap.dart';
+import 'package:todo/ui/shared/extensions.dart';
+import 'package:todo/ui/shared/styles.dart';
+import 'package:todo/core/viewmodels/todo_model.dart';
 
 class TodoDetails extends StatefulWidget {
   @override
@@ -36,7 +38,8 @@ class _TodoDetailsState extends State<TodoDetails> {
               child: Container(
                 height: size.height * 0.2,
                 width: size.width * 0.7,
-                child: SvgPicture.asset("assets/${todoProvider.selectedTodo.category}.svg"),
+                child: SvgPicture.asset(
+                    "assets/${todoProvider.selectedTodo.category}.svg"),
               ),
             ),
             Container(
@@ -48,13 +51,15 @@ class _TodoDetailsState extends State<TodoDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                        todoProvider.selectedTodo.title,
-                        style: kLargeTextStyle,
+                      Expanded(
+                        child: Text(
+                          todoProvider.selectedTodo.title,
+                          style: kLargeTextStyle,
+                        ),
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, 'todoEdit');
+                          AutoRouter.of(context).push(TodoEditRoute());
                         },
                         child: Text(
                           'Edit',
@@ -69,7 +74,9 @@ class _TodoDetailsState extends State<TodoDetails> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    todoProvider.selectedTodo.date.day.toString() + " " + todoProvider.selectedTodo.date.month.name(),
+                    todoProvider.selectedTodo.date.day.toString() +
+                        " " +
+                        todoProvider.selectedTodo.date.month.name(),
                     style: kMediumTextStyle,
                   ),
                   SizedBox(height: 30),

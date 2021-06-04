@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/provider/theme_provider.dart';
-import 'package:todo/provider/todo_provider.dart';
-import 'package:todo/screens/home.dart';
-import 'package:todo/screens/profile.dart';
-import 'package:todo/screens/todo_details.dart';
-import 'package:todo/screens/todo_edit.dart';
+import 'package:todo/core/viewmodels/theme_model.dart';
+import 'package:todo/core/viewmodels/todo_model.dart';
+import 'package:todo/ui/routes/router.gr.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // This widget is the root of your application
+  final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -25,21 +24,20 @@ class MyApp extends StatelessWidget {
         ),
       ],
       builder: (context, _) {
-        return MaterialApp(
+        return MaterialApp.router(
+          routerDelegate: _appRouter.delegate(),
+          routeInformationParser: _appRouter.defaultRouteParser(),
           debugShowCheckedModeBanner: false,
           title: 'ToDo App',
           themeMode: Provider.of<ThemeProvider>(context).themeMode,
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
-          home: HomePage(),
-          routes: {
-            'home': (context) => HomePage(),
-            'profile': (context) => Profile(),
-            'todoDetails': (context) => TodoDetails(),
-            'todoEdit': (context) => TodoEdit(),
-          },
         );
       },
     );
   }
 }
+
+// Todo
+// 1. Implement Dependency injection.
+// 2. Use View model and service.

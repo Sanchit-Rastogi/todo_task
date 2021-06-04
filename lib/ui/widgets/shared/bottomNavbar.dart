@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/constants/styles.dart';
-import 'package:todo/models/todoModel.dart';
-import 'package:todo/provider/todo_provider.dart';
+import 'package:todo/ui/routes/router.gr.dart';
+import 'package:todo/ui/shared/styles.dart';
+import 'package:todo/core/models/todo.dart';
+import 'package:todo/core/viewmodels/todo_model.dart';
 
 class TodoNavBar extends StatefulWidget {
   final bool isProfile;
@@ -26,9 +28,14 @@ class _TodoNavBarState extends State<TodoNavBar> {
               Icon(
                 Icons.folder,
                 size: 30,
-                color: widget.isProfile ? Theme.of(context).accentIconTheme.color : Theme.of(context).iconTheme.color,
+                color: widget.isProfile
+                    ? Theme.of(context).accentIconTheme.color
+                    : Theme.of(context).iconTheme.color,
               ),
-              Text('To Do', style: widget.isProfile ? kNavBarInActiveTextStyle : kNavBarActiveTextStyle),
+              Text('To Do',
+                  style: widget.isProfile
+                      ? kNavBarInActiveTextStyle
+                      : kNavBarActiveTextStyle),
             ],
           ),
           InkWell(
@@ -39,7 +46,7 @@ class _TodoNavBarState extends State<TodoNavBar> {
                 title: 'title',
                 date: DateTime.now(),
               );
-              Navigator.pushNamed(context, 'todoEdit');
+              AutoRouter.of(context).push(TodoEditRoute());
             },
             child: Container(
               padding: EdgeInsets.all(7),
@@ -56,16 +63,21 @@ class _TodoNavBarState extends State<TodoNavBar> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, 'profile');
+              AutoRouter.of(context).push(ProfileRoute());
             },
             child: Column(
               children: [
                 Icon(
                   Icons.person,
                   size: 30,
-                  color: widget.isProfile ? Theme.of(context).iconTheme.color : Theme.of(context).accentIconTheme.color,
+                  color: widget.isProfile
+                      ? Theme.of(context).iconTheme.color
+                      : Theme.of(context).accentIconTheme.color,
                 ),
-                Text('Profile', style: widget.isProfile ? kNavBarActiveTextStyle : kNavBarInActiveTextStyle),
+                Text('Profile',
+                    style: widget.isProfile
+                        ? kNavBarActiveTextStyle
+                        : kNavBarInActiveTextStyle),
               ],
             ),
           ),

@@ -1,12 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:todo/constants/colorMap.dart';
-import 'package:todo/constants/extensions.dart';
-import 'package:todo/constants/styles.dart';
-import 'package:todo/models/todoModel.dart';
-import 'package:todo/provider/todo_provider.dart';
+import 'package:todo/ui/routes/router.gr.dart';
+import 'package:todo/ui/shared/colorMap.dart';
+import 'package:todo/ui/shared/extensions.dart';
+import 'package:todo/ui/shared/styles.dart';
+import 'package:todo/core/models/todo.dart';
+import 'package:todo/core/viewmodels/todo_model.dart';
 
 class TodoEdit extends StatefulWidget {
   @override
@@ -56,7 +58,7 @@ class _TodoEditState extends State<TodoEdit> {
       print('created');
       todoProvider.addTodo(todo);
     }
-    Navigator.pushNamed(context, 'home');
+    AutoRouter.of(context).push(HomePageRoute());
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo/db/todo_database.dart';
-import 'package:todo/models/todoModel.dart';
+import 'package:todo/core/services/todo_database.dart';
+import 'package:todo/core/models/todo.dart';
 
 class TodoProvider extends ChangeNotifier {
   TodoModel selectedTodo = TodoModel(

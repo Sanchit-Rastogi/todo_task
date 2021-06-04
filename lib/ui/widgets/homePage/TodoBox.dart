@@ -1,11 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/constants/colorMap.dart';
-import 'package:todo/constants/extensions.dart';
-import 'package:todo/constants/styles.dart';
-import 'package:todo/models/todoModel.dart';
-import 'package:todo/provider/todo_provider.dart';
+import 'package:todo/ui/routes/router.gr.dart';
+import 'package:todo/ui/shared/colorMap.dart';
+import 'package:todo/ui/shared/extensions.dart';
+import 'package:todo/ui/shared/styles.dart';
+import 'package:todo/core/models/todo.dart';
+import 'package:todo/core/viewmodels/todo_model.dart';
 
 class TodoBox extends StatelessWidget {
   final TodoModel todo;
@@ -50,7 +52,7 @@ class TodoBox extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, 'todoDetails');
+                AutoRouter.of(context).push(TodoDetailsRoute());
                 todoProvider.selectedTodo = todo;
               },
               child: Column(

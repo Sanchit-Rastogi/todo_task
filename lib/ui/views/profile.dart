@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/constants/styles.dart';
-import 'package:todo/provider/theme_provider.dart';
+import 'package:todo/ui/shared/styles.dart';
+import 'package:todo/core/viewmodels/theme_model.dart';
 
 class Profile extends StatefulWidget {
   @override
