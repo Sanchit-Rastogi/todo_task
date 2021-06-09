@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/core/viewmodels/theme_model.dart';
-import 'package:todo/core/viewmodels/todo_model.dart';
+import 'package:todo/core/services/provider/theme_provider.dart';
+import 'package:todo/core/services/provider/todo_provider.dart';
+import 'package:todo/locator.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 
 void main() {
+  setUpLocator();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application
   final _appRouter = AppRouter();
 
   @override
@@ -37,7 +38,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// Todo
-// 1. Implement Dependency injection.
-// 2. Use View model and service.

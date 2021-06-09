@@ -5,10 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 import 'package:todo/ui/shared/colorMap.dart';
-import 'package:todo/ui/shared/extensions.dart';
+import 'package:todo/core/services/extensions/extensions.dart';
 import 'package:todo/ui/shared/styles.dart';
 import 'package:todo/core/models/todo.dart';
-import 'package:todo/core/viewmodels/todo_model.dart';
+import 'package:todo/core/services/provider/todo_provider.dart';
 
 class TodoEdit extends StatefulWidget {
   @override

@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 import 'package:todo/ui/shared/colorMap.dart';
-import 'package:todo/ui/shared/extensions.dart';
+import 'package:todo/core/services/extensions/extensions.dart';
 import 'package:todo/ui/shared/styles.dart';
-import 'package:todo/core/viewmodels/todo_model.dart';
+import 'package:todo/core/services/provider/todo_provider.dart';
 
 class TodoDetails extends StatefulWidget {
   @override

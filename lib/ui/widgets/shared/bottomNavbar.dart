@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 import 'package:todo/ui/shared/styles.dart';
 import 'package:todo/core/models/todo.dart';
-import 'package:todo/core/viewmodels/todo_model.dart';
+import 'package:todo/core/services/provider/todo_provider.dart';
 
 class TodoNavBar extends StatefulWidget {
   final bool isProfile;
