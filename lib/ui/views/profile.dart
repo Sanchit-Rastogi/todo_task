@@ -11,65 +11,68 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  final ProfileModel profileModel = locator<ProfileModel>();
+  //final ProfileModel profileModel = locator<ProfileModel>();
 
   final ThemeProvider themeProvider = locator<ThemeProvider>();
 
   @override
   void initState() {
-    profileModel.onInit();
+    //profileModel.onInit();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Complete widget building");
     return ChangeNotifierProvider<ProfileModel>(
       create: (context) => locator<ProfileModel>(),
       child: Consumer<ProfileModel>(
-        builder: (context, value, child) {
-          print("Scaffold building");
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Profile"),
-            ),
-            body: Container(
-              padding: EdgeInsets.only(top: 30),
-              child: Column(
-                children: [
-                  Text(
-                    "Set App Theme",
-                    style: kMediumTextStyle,
-                  ),
-                  SizedBox(height: 20),
-                  ListTile(
-                    leading: Checkbox(
-                        value: profileModel.themeValues[0],
-                        onChanged: (value) {
-                          profileModel.updateThemeValue(0);
-                          themeProvider.setTheme(ThemeMode.system);
-                        }),
-                    title: Text('System Default'),
-                  ),
-                  ListTile(
-                    leading: Checkbox(
-                        value: profileModel.themeValues[1],
-                        onChanged: (value) {
-                          profileModel.updateThemeValue(1);
-                          themeProvider.setTheme(ThemeMode.light);
-                        }),
-                    title: Text('Light Theme'),
-                  ),
-                  ListTile(
-                    leading: Checkbox(
-                        value: profileModel.themeValues[2],
-                        onChanged: (value) {
-                          profileModel.updateThemeValue(2);
-                          themeProvider.setTheme(ThemeMode.dark);
-                        }),
-                    title: Text('Dark Theme'),
-                  ),
-                ],
+        builder: (context, model, child) {
+          print(model.currentTheme);
+          return MaterialApp(
+            showSemanticsDebugger: false,
+            themeMode: model.currentTheme,
+            home: Scaffold(
+              appBar: AppBar(
+                title: Text("Profile"),
+              ),
+              body: Container(
+                padding: EdgeInsets.only(top: 30),
+                child: Column(
+                  children: [
+                    Text(
+                      "Set App Theme",
+                      style: kMediumTextStyle,
+                    ),
+                    SizedBox(height: 20),
+                    ListTile(
+                      leading: Checkbox(
+                          value: model.themeValues[0],
+                          onChanged: (value) {
+                            model.updateThemeValue(0);
+                            themeProvider.setTheme(ThemeMode.system);
+                          }),
+                      title: Text('System Default'),
+                    ),
+                    ListTile(
+                      leading: Checkbox(
+                          value: model.themeValues[1],
+                          onChanged: (value) {
+                            model.updateThemeValue(1);
+                            themeProvider.setTheme(ThemeMode.light);
+                          }),
+                      title: Text('Light Theme'),
+                    ),
+                    ListTile(
+                      leading: Checkbox(
+                          value: model.themeValues[2],
+                          onChanged: (value) {
+                            model.updateThemeValue(2);
+                            themeProvider.setTheme(ThemeMode.dark);
+                          }),
+                      title: Text('Dark Theme'),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
