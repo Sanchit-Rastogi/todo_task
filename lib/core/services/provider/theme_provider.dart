@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo/core/viewmodels/profile_model.dart';
-import 'package:todo/locator.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
@@ -9,10 +7,10 @@ class ThemeProvider extends ChangeNotifier {
       SharedPreferences.getInstance();
   String key = "theme";
 
-  // Future<ThemeMode> getTheme() async {
-  //   _loadFromPrefer();
-  //   return themeMode;
-  // }
+  void getTheme() async {
+    await _loadFromPrefer();
+    notifyListeners();
+  }
 
   ThemeProvider() {
     _loadFromPrefer();
@@ -36,8 +34,6 @@ class ThemeProvider extends ChangeNotifier {
 
   setTheme(ThemeMode mode) {
     themeMode = mode;
-    locator<ProfileModel>().updateTheme(mode);
-    print(locator<ProfileModel>().currentTheme);
     _savePrefs(mode);
     notifyListeners();
   }

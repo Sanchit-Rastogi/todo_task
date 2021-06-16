@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/services/provider/theme_provider.dart';
 import 'package:todo/core/services/provider/todo_provider.dart';
-import 'package:todo/core/viewmodels/profile_model.dart';
 import 'package:todo/locator.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
           routeInformationParser: _appRouter.defaultRouteParser(),
           debugShowCheckedModeBanner: false,
           title: 'ToDo App',
-          themeMode: locator<ProfileModel>().currentTheme,
+          themeMode: Provider.of<ThemeProvider>(context).themeMode,
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
         );

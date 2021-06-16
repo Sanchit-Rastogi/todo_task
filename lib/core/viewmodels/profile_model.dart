@@ -6,10 +6,9 @@ class ProfileModel extends ChangeNotifier {
   final ThemeProvider themeProvider = locator<ThemeProvider>();
   List<bool> themeValues = [true, false, false];
 
-  ThemeMode currentTheme = ThemeMode.system;
 
   void updateTheme(ThemeMode mode) {
-    currentTheme = mode;
+    themeProvider.setTheme(mode);
     notifyListeners();
   }
 
@@ -25,11 +24,11 @@ class ProfileModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onInit() {
-    print(themeProvider.themeMode);
-    if (themeProvider.themeMode == ThemeMode.dark)
-      updateThemeValue(2);
-    else if (themeProvider.themeMode == ThemeMode.light) updateThemeValue(1);
-    print(themeValues);
-  }
+  // void onInit() {
+  //   print(themeProvider.themeMode);
+  //   if (themeProvider.themeMode == ThemeMode.dark)
+  //     updateThemeValue(2);
+  //   else if (themeProvider.themeMode == ThemeMode.light) updateThemeValue(1);
+  //   print(themeValues);
+  // }
 }
