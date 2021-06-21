@@ -1,13 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
+import 'package:todo/core/models/todo.dart';
+import 'package:todo/core/services/extensions/extensions.dart';
+import 'package:todo/core/services/provider/todo_provider.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 import 'package:todo/ui/shared/colorMap.dart';
-import 'package:todo/core/services/extensions/extensions.dart';
 import 'package:todo/ui/shared/styles.dart';
-import 'package:todo/core/models/todo.dart';
-import 'package:todo/core/services/provider/todo_provider.dart';
+
+import '../../../locator.dart';
 
 class TodoBox extends StatelessWidget {
   final TodoModel todo;
@@ -16,7 +17,7 @@ class TodoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context, listen: false);
+    final todoProvider = locator<TodoProvider>();
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(bottom: 20),
@@ -53,6 +54,7 @@ class TodoBox extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 AutoRouter.of(context).push(TodoDetailsRoute());
+                print(todo.id);
                 todoProvider.selectedTodo = todo;
               },
               child: Column(

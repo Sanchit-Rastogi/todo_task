@@ -12,5 +12,5 @@ void setUpLocator() {
   locator.registerLazySingleton(() => TodoProvider());
 
   locator.registerFactory(() => ProfileModel());
-  locator.registerFactory(() => TodoEditModel());
+  locator.registerLazySingleton(() => TodoEditModel());
 }

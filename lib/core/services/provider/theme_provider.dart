@@ -7,7 +7,7 @@ class ThemeProvider extends ChangeNotifier {
       SharedPreferences.getInstance();
   String key = "theme";
 
-  void getTheme() async {
+  Future<void> getTheme() async {
     await _loadFromPrefer();
     notifyListeners();
   }
@@ -33,6 +33,7 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   setTheme(ThemeMode mode) {
+    print('Setting preference');
     themeMode = mode;
     _savePrefs(mode);
     notifyListeners();

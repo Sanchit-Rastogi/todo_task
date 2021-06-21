@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo/core/models/todo.dart';
 import 'package:todo/core/services/extensions/extensions.dart';
 import 'package:todo/core/services/provider/todo_provider.dart';
 import 'package:todo/core/viewmodels/todoEdit_model.dart';
+import 'package:todo/ui/routes/router.gr.dart';
 import 'package:todo/ui/shared/colorMap.dart';
 import 'package:todo/ui/shared/styles.dart';
 
@@ -22,7 +25,7 @@ class _TodoEditState extends State<TodoEdit> {
   @override
   void initState() {
     final model = locator<TodoEditModel>();
-    final todoProvider = Provider.of<TodoProvider>(context, listen: false);
+    final todoProvider = locator<TodoProvider>();
     model.onInit();
     titleController.text = todoProvider.selectedTodo.title;
     detailsController.text = todoProvider.selectedTodo.details;
@@ -31,7 +34,7 @@ class _TodoEditState extends State<TodoEdit> {
 
   @override
   Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context);
+    final todoProvider = locator<TodoProvider>();
     return ChangeNotifierProvider<TodoEditModel>(
       create: (context) => locator<TodoEditModel>(),
       child: Consumer<TodoEditModel>(
@@ -41,9 +44,7 @@ class _TodoEditState extends State<TodoEdit> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               title: Text(
-                model.currentDate.year.toString() +
-                    "  " +
-                    model.currentDate.month.name(),
+                model.currentDate.year.toString() + "  " + model.currentDate.month.name(),
                 style: TextStyle(
                   color: Theme.of(context).accentColor,
                   fontSize: 36,
@@ -89,24 +90,14 @@ class _TodoEditState extends State<TodoEdit> {
                           },
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 20),
+                          margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                           height: 40,
                           padding: EdgeInsets.zero,
                           decoration: BoxDecoration(
                             border: Border(
-                              top: BorderSide(
-                                  width: 1,
-                                  color: colorMap[model.selectedCategory] ??
-                                      kFamilyColor),
-                              bottom: BorderSide(
-                                  width: 1,
-                                  color: colorMap[model.selectedCategory] ??
-                                      kFamilyColor),
-                              left: BorderSide(
-                                  width: 1,
-                                  color: colorMap[model.selectedCategory] ??
-                                      kFamilyColor),
+                              top: BorderSide(width: 1, color: colorMap[model.selectedCategory] ?? kFamilyColor),
+                              bottom: BorderSide(width: 1, color: colorMap[model.selectedCategory] ?? kFamilyColor),
+                              left: BorderSide(width: 1, color: colorMap[model.selectedCategory] ?? kFamilyColor),
                             ),
                           ),
                           child: Row(
@@ -116,14 +107,7 @@ class _TodoEditState extends State<TodoEdit> {
                                   onTap: () {
                                     model.changeCategory('Work');
                                   },
-                                  child: CategoryBox(
-                                      boxColor:
-                                          colorMap[model.selectedCategory] ??
-                                              kFamilyColor,
-                                      isSelected:
-                                          model.categorySelection['Work'] ??
-                                              false,
-                                      category: 'Work'),
+                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Work'] ?? false, category: 'Work'),
                                 ),
                               ),
                               Expanded(
@@ -131,14 +115,7 @@ class _TodoEditState extends State<TodoEdit> {
                                   onTap: () {
                                     model.changeCategory('Fun');
                                   },
-                                  child: CategoryBox(
-                                      boxColor:
-                                          colorMap[model.selectedCategory] ??
-                                              kFamilyColor,
-                                      isSelected:
-                                          model.categorySelection['Fun'] ??
-                                              false,
-                                      category: 'Fun'),
+                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Fun'] ?? false, category: 'Fun'),
                                 ),
                               ),
                               Expanded(
@@ -146,14 +123,7 @@ class _TodoEditState extends State<TodoEdit> {
                                   onTap: () {
                                     model.changeCategory('Sport');
                                   },
-                                  child: CategoryBox(
-                                      boxColor:
-                                          colorMap[model.selectedCategory] ??
-                                              kFamilyColor,
-                                      isSelected:
-                                          model.categorySelection['Sport'] ??
-                                              false,
-                                      category: 'Sport'),
+                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Sport'] ?? false, category: 'Sport'),
                                 ),
                               ),
                               Expanded(
@@ -161,14 +131,7 @@ class _TodoEditState extends State<TodoEdit> {
                                   onTap: () {
                                     model.changeCategory('Study');
                                   },
-                                  child: CategoryBox(
-                                      boxColor:
-                                          colorMap[model.selectedCategory] ??
-                                              kFamilyColor,
-                                      isSelected:
-                                          model.categorySelection['Study'] ??
-                                              false,
-                                      category: 'Study'),
+                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Study'] ?? false, category: 'Study'),
                                 ),
                               ),
                               Expanded(
@@ -176,14 +139,7 @@ class _TodoEditState extends State<TodoEdit> {
                                   onTap: () {
                                     model.changeCategory('Family');
                                   },
-                                  child: CategoryBox(
-                                      boxColor:
-                                          colorMap[model.selectedCategory] ??
-                                              kFamilyColor,
-                                      isSelected:
-                                          model.categorySelection['Family'] ??
-                                              false,
-                                      category: 'Family'),
+                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Family'] ?? false, category: 'Family'),
                                 ),
                               ),
                               Expanded(
@@ -191,22 +147,14 @@ class _TodoEditState extends State<TodoEdit> {
                                   onTap: () {
                                     model.changeCategory('Birth');
                                   },
-                                  child: CategoryBox(
-                                      boxColor:
-                                          colorMap[model.selectedCategory] ??
-                                              kFamilyColor,
-                                      isSelected:
-                                          model.categorySelection['Birth'] ??
-                                              false,
-                                      category: 'Birth'),
+                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Birth'] ?? false, category: 'Birth'),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: 'Title',
@@ -215,8 +163,7 @@ class _TodoEditState extends State<TodoEdit> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
+                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: 'Details',
@@ -229,8 +176,7 @@ class _TodoEditState extends State<TodoEdit> {
                       ],
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                       width: MediaQuery.of(context).size.width,
                       height: 40,
                       child: ElevatedButton(
@@ -243,11 +189,12 @@ class _TodoEditState extends State<TodoEdit> {
                             id: todoProvider.selectedTodo.id ?? null,
                           );
                           model.updateOrAdd(todo);
-                          // AutoRouter.of(context).push(HomePageRoute());
-                          // Fluttertoast.showToast(
-                          //   msg: 'To Do saved successfully',
-                          //   toastLength: Toast.LENGTH_SHORT,
-                          // );
+                          AutoRouter.of(context).push(HomePageRoute());
+                          Fluttertoast.showToast(
+                            msg: 'To Do saved successfully',
+                            toastLength: Toast.LENGTH_SHORT,
+                          );
+                          locator<TodoProvider>().loadTodo();
                         },
                         style: ElevatedButton.styleFrom(
                           primary: colorMap[model.selectedCategory],
@@ -276,10 +223,7 @@ class CategoryBox extends StatelessWidget {
   final bool isSelected;
   final String category;
 
-  CategoryBox(
-      {required this.boxColor,
-      required this.isSelected,
-      required this.category});
+  CategoryBox({required this.boxColor, required this.isSelected, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -287,8 +231,7 @@ class CategoryBox extends StatelessWidget {
       height: 40,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color:
-            isSelected ? boxColor : Theme.of(context).scaffoldBackgroundColor,
+        color: isSelected ? boxColor : Theme.of(context).scaffoldBackgroundColor,
         border: Border(
           right: BorderSide(width: 1, color: boxColor),
         ),
@@ -296,9 +239,7 @@ class CategoryBox extends StatelessWidget {
       child: Text(
         category,
         style: TextStyle(
-          color: boxColor == Colors.black && isSelected
-              ? Colors.white
-              : Theme.of(context).accentColor,
+          color: boxColor == Colors.black && isSelected ? Colors.white : Theme.of(context).accentColor,
         ),
       ),
     );

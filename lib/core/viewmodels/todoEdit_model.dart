@@ -9,14 +9,7 @@ class TodoEditModel extends ChangeNotifier {
   DateTime? selectedDay;
   String selectedCategory = "Fun";
 
-  List<String> categories = [
-    'Work',
-    'Fun',
-    'Sport',
-    'Study',
-    'Family',
-    'Birth'
-  ];
+  List<String> categories = ['Work', 'Fun', 'Sport', 'Study', 'Family', 'Birth'];
 
   Map<String, bool> categorySelection = {
     'Work': false,
@@ -47,8 +40,6 @@ class TodoEditModel extends ChangeNotifier {
 
   void updateOrAdd(TodoModel todo) {
     final todoProvider = locator<TodoProvider>();
-    print(todo.id);
-    print(todoProvider.selectedTodo.id);
     if (todoProvider.selectedTodo.id != null) {
       print('updated');
       todoProvider.updateTodo(todo);

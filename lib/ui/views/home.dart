@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo/ui/shared/styles.dart';
 import 'package:todo/core/db/todo_database.dart';
 import 'package:todo/core/services/provider/todo_provider.dart';
+import 'package:todo/ui/shared/styles.dart';
 import 'package:todo/ui/widgets/homePage/TodoBox.dart';
 import 'package:todo/ui/widgets/shared/bottomNavbar.dart';
+
+import '../../locator.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    Provider.of<TodoProvider>(context, listen: false).loadTodo();
+    locator<TodoProvider>().loadTodo();
     super.initState();
   }
 
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context);
+    final todoProvider = locator<TodoProvider>();
     return Scaffold(
       body: SafeArea(
         child: Container(

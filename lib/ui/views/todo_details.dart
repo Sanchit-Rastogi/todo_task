@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:todo/core/services/extensions/extensions.dart';
+import 'package:todo/core/services/provider/todo_provider.dart';
 import 'package:todo/ui/routes/router.gr.dart';
 import 'package:todo/ui/shared/colorMap.dart';
-import 'package:todo/core/services/extensions/extensions.dart';
 import 'package:todo/ui/shared/styles.dart';
-import 'package:todo/core/services/provider/todo_provider.dart';
+
+import '../../locator.dart';
 
 class TodoDetails extends StatefulWidget {
   @override
@@ -16,8 +17,9 @@ class TodoDetails extends StatefulWidget {
 class _TodoDetailsState extends State<TodoDetails> {
   @override
   Widget build(BuildContext context) {
-    final todoProvider = Provider.of<TodoProvider>(context);
+    final todoProvider = locator<TodoProvider>();
     final size = MediaQuery.of(context).size;
+    print(todoProvider.selectedTodo.title);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -38,8 +40,7 @@ class _TodoDetailsState extends State<TodoDetails> {
               child: Container(
                 height: size.height * 0.2,
                 width: size.width * 0.7,
-                child: SvgPicture.asset(
-                    "assets/${todoProvider.selectedTodo.category}.svg"),
+                child: SvgPicture.asset("assets/${todoProvider.selectedTodo.category}.svg"),
               ),
             ),
             Container(
@@ -74,9 +75,7 @@ class _TodoDetailsState extends State<TodoDetails> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    todoProvider.selectedTodo.date.day.toString() +
-                        " " +
-                        todoProvider.selectedTodo.date.month.name(),
+                    todoProvider.selectedTodo.date.day.toString() + " " + todoProvider.selectedTodo.date.month.name(),
                     style: kMediumTextStyle,
                   ),
                   SizedBox(height: 30),
