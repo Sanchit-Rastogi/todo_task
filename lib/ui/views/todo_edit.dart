@@ -22,9 +22,10 @@ class _TodoEditState extends State<TodoEdit> {
   TextEditingController titleController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
 
+  final model = locator<TodoEditModel>();
+
   @override
   void initState() {
-    final model = locator<TodoEditModel>();
     final todoProvider = locator<TodoProvider>();
     model.onInit();
     titleController.text = todoProvider.selectedTodo.title;
@@ -36,7 +37,7 @@ class _TodoEditState extends State<TodoEdit> {
   Widget build(BuildContext context) {
     final todoProvider = locator<TodoProvider>();
     return ChangeNotifierProvider<TodoEditModel>(
-      create: (context) => locator<TodoEditModel>(),
+      create: (context) => model,
       child: Consumer<TodoEditModel>(
         builder: (context, model, child) {
           return Scaffold(

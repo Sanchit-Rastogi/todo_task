@@ -22,5 +22,6 @@ class ProfileModel extends ChangeNotifier {
     if (themeProvider.themeMode == ThemeMode.dark)
       updateThemeValue(2);
     else if (themeProvider.themeMode == ThemeMode.light) updateThemeValue(1);
+    print(themeValues);
   }
 }

@@ -3,8 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
-  Future<SharedPreferences> _sharedPreferences =
-      SharedPreferences.getInstance();
+  Future<SharedPreferences> _sharedPreferences = SharedPreferences.getInstance();
   String key = "theme";
 
   Future<void> getTheme() async {
@@ -33,7 +32,6 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   setTheme(ThemeMode mode) {
-    print('Setting preference');
     themeMode = mode;
     _savePrefs(mode);
     notifyListeners();

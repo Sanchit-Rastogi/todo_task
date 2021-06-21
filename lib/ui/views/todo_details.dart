@@ -19,7 +19,6 @@ class _TodoDetailsState extends State<TodoDetails> {
   Widget build(BuildContext context) {
     final todoProvider = locator<TodoProvider>();
     final size = MediaQuery.of(context).size;
-    print(todoProvider.selectedTodo.title);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

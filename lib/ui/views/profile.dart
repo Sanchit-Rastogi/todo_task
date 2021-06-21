@@ -11,9 +11,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final model = locator<ProfileModel>();
+
   @override
   void initState() {
-    locator<ProfileModel>().onInit();
+    model.onInit();
     super.initState();
   }
 
@@ -21,7 +23,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return ChangeNotifierProvider<ProfileModel>(
-      create: (context) => locator<ProfileModel>(),
+      create: (context) => model,
       child: Consumer<ProfileModel>(
         builder: (context, model, child) {
           return Scaffold(

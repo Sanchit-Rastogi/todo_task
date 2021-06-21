@@ -54,7 +54,6 @@ class TodoBox extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 AutoRouter.of(context).push(TodoDetailsRoute());
-                print(todo.id);
                 todoProvider.selectedTodo = todo;
               },
               child: Column(
