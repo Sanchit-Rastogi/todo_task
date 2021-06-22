@@ -21,7 +21,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     return ChangeNotifierProvider<ProfileModel>(
       create: (context) => model,
       child: Consumer<ProfileModel>(
@@ -39,42 +38,28 @@ class _ProfileState extends State<Profile> {
                     style: kMediumTextStyle,
                   ),
                   SizedBox(height: 20),
-                  ListTile(
-                    leading: Checkbox(
-                        key: Key('system'),
-                        value: model.themeValues[0],
-                        onChanged: (value) {
-                          model.updateThemeValue(0);
-                          themeProvider.setTheme(ThemeMode.system);
-                        }),
-                    title: Text('System Default'),
-                  ),
-                  ListTile(
-                    leading: Checkbox(
-                        key: Key('light'),
-                        value: model.themeValues[1],
-                        onChanged: (value) {
-                          model.updateThemeValue(1);
-                          themeProvider.setTheme(ThemeMode.light);
-                        }),
-                    title: Text('Light Theme'),
-                  ),
-                  ListTile(
-                    leading: Checkbox(
-                        key: Key('dark'),
-                        value: model.themeValues[2],
-                        onChanged: (value) {
-                          model.updateThemeValue(2);
-                          themeProvider.setTheme(ThemeMode.dark);
-                        }),
-                    title: Text('Dark Theme'),
-                  ),
+                  themeCheckBox(0, ThemeMode.system, 'System Theme'),
+                  themeCheckBox(1, ThemeMode.light, 'Light Theme'),
+                  themeCheckBox(2, ThemeMode.dark, 'Dark Theme'),
                 ],
               ),
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget themeCheckBox(int num, ThemeMode mode, String text) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return ListTile(
+      leading: Checkbox(
+          value: model.themeValues[num],
+          onChanged: (value) {
+            model.updateThemeValue(num);
+            themeProvider.setTheme(mode);
+          }),
+      title: Text(text),
     );
   }
 }

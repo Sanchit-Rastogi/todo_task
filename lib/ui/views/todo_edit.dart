@@ -103,54 +103,12 @@ class _TodoEditState extends State<TodoEdit> {
                           ),
                           child: Row(
                             children: [
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    model.changeCategory('Work');
-                                  },
-                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Work'] ?? false, category: 'Work'),
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    model.changeCategory('Fun');
-                                  },
-                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Fun'] ?? false, category: 'Fun'),
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    model.changeCategory('Sport');
-                                  },
-                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Sport'] ?? false, category: 'Sport'),
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    model.changeCategory('Study');
-                                  },
-                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Study'] ?? false, category: 'Study'),
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    model.changeCategory('Family');
-                                  },
-                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Family'] ?? false, category: 'Family'),
-                                ),
-                              ),
-                              Expanded(
-                                child: InkWell(
-                                  onTap: () {
-                                    model.changeCategory('Birth');
-                                  },
-                                  child: CategoryBox(boxColor: colorMap[model.selectedCategory] ?? kFamilyColor, isSelected: model.categorySelection['Birth'] ?? false, category: 'Birth'),
-                                ),
-                              ),
+                              categoryBox(colorMap[model.selectedCategory] ?? kFamilyColor, model.categorySelection['Work'] ?? false, 'Work'),
+                              categoryBox(colorMap[model.selectedCategory] ?? kFamilyColor, model.categorySelection['Fun'] ?? false, 'Fun'),
+                              categoryBox(colorMap[model.selectedCategory] ?? kFamilyColor, model.categorySelection['Sport'] ?? false, 'Sport'),
+                              categoryBox(colorMap[model.selectedCategory] ?? kFamilyColor, model.categorySelection['Study'] ?? false, 'Study'),
+                              categoryBox(colorMap[model.selectedCategory] ?? kFamilyColor, model.categorySelection['Family'] ?? false, 'Family'),
+                              categoryBox(colorMap[model.selectedCategory] ?? kFamilyColor, model.categorySelection['Birth'] ?? false, 'Birth'),
                             ],
                           ),
                         ),
@@ -217,32 +175,58 @@ class _TodoEditState extends State<TodoEdit> {
       ),
     );
   }
-}
 
-class CategoryBox extends StatelessWidget {
-  final Color boxColor;
-  final bool isSelected;
-  final String category;
-
-  CategoryBox({required this.boxColor, required this.isSelected, required this.category});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: isSelected ? boxColor : Theme.of(context).scaffoldBackgroundColor,
-        border: Border(
-          right: BorderSide(width: 1, color: boxColor),
-        ),
-      ),
-      child: Text(
-        category,
-        style: TextStyle(
-          color: boxColor == Colors.black && isSelected ? Colors.white : Theme.of(context).accentColor,
+  Widget categoryBox(Color boxColor, bool isSelected, String category) {
+    return Expanded(
+      child: InkWell(
+        onTap: () {
+          model.changeCategory(category);
+        },
+        child: Container(
+          height: 40,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelected ? boxColor : Theme.of(context).scaffoldBackgroundColor,
+            border: Border(
+              right: BorderSide(width: 1, color: boxColor),
+            ),
+          ),
+          child: Text(
+            category,
+            style: TextStyle(
+              color: boxColor == Colors.black && isSelected ? Colors.white : Theme.of(context).accentColor,
+            ),
+          ),
         ),
       ),
     );
   }
 }
+
+// class CategoryBox extends StatelessWidget {
+//   final Color boxColor;
+//   final bool isSelected;
+//   final String category;
+//
+//   CategoryBox({required this.boxColor, required this.isSelected, required this.category});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 40,
+//       alignment: Alignment.center,
+//       decoration: BoxDecoration(
+//         color: isSelected ? boxColor : Theme.of(context).scaffoldBackgroundColor,
+//         border: Border(
+//           right: BorderSide(width: 1, color: boxColor),
+//         ),
+//       ),
+//       child: Text(
+//         category,
+//         style: TextStyle(
+//           color: boxColor == Colors.black && isSelected ? Colors.white : Theme.of(context).accentColor,
+//         ),
+//       ),
+//     );
+//   }
+// }

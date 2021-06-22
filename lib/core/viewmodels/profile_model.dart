@@ -3,7 +3,7 @@ import 'package:todo/core/services/provider/theme_provider.dart';
 import 'package:todo/locator.dart';
 
 class ProfileModel extends ChangeNotifier {
-  final ThemeProvider themeProvider = locator<ThemeProvider>();
+  final themeProvider = locator<ThemeProvider>();
   List<bool> themeValues = [true, false, false];
 
   void updateThemeValue(int id) {
